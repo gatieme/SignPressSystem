@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SignPress</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">HDJ会签单</string>
+    <string name="logo">HLJSHDJ</string>
+    <string name="username">用户名</string>
+    <string name="login">登录</string>
+    <string name="password">密码</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="SignManage">签字管理</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="loginname">会签单</string>
+    <string name="Remark">备注：同意时可不填写，但是拒绝的时候必须填写拒绝理由</string>
+    <string name="Agree">同意</string>
+    <string name="Refuse">拒绝</string>
+    <string name="title_activity_en_detail">EnDetailActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="exit">退出</string>
+	<string name="back">返回</string>
+</resources>

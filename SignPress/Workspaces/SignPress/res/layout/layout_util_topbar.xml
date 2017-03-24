@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dip"
+    android:background="#4169E1" >
+
+    <ImageButton
+        android:id="@+id/leftutton"
+        android:layout_width="50dip"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:src="@drawable/navigation_previous_item" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="下载计划表"
+        android:textSize="22sp" />
+
+</RelativeLayout>

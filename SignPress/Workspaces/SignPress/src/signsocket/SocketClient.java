@@ -53,7 +53,10 @@ public class SocketClient
     public static DataOutputStream out=null;
     public static DataInputStream in=null;
     //public static BufferedReader inbuff=null;
-    private static final String SERVER_IP   = "218.7.0.37"; //"221.212.58.67";
+//    private static final String SERVER_IP   = "218.7.0.37"; //"221.212.58.67";
+   // private static final String SERVER_IP   = "218.7.0.37"; //"221.212.58.67";
+    
+    private static final String SERVER_IP   = "222.171.195.97";
     //private static final String SERVER_IP   =  "10.0.51.141";
     private static final int    SERVER_PORT      = 6666;//7777;
     
@@ -155,11 +158,12 @@ public class SocketClient
 		{
 			//  发送登录请求以及数据
 			SocketMessage message = new SocketMessage(ClientRequest.LOGIN_REQUEST, user);
-			
+			//write 相当于C#中的send
 			out.write(message.Package.getBytes("utf-8"));
+			//将信息发出
 			out.flush();
 			
-		
+			//读取
 	 		m_recvBuffer =  new byte[1024 * 4];
 			in.read(m_recvBuffer, 0, 1024 * 4);
 		
@@ -189,7 +193,7 @@ public class SocketClient
 		
 	}
 	
-	// 查询未签字的信息
+	// 查询需要签字的信息
 	public ArrayList<SHDJContract> QueryUnsignedHDJContract(int employeeId)
 	{
 		ArrayList<SHDJContract> contracts = new ArrayList<SHDJContract>();
@@ -315,7 +319,7 @@ public class SocketClient
 		return contract;	
 	}
 	
-	// 进行签字确认
+	// 进行签字
 	public boolean InsertSignatureDetail(SignatureDetail detail)
 	{
 		try
@@ -335,7 +339,7 @@ public class SocketClient
 			
 			if(message.Head.equals(ServerResponse.INSERT_SIGN_DETAIL_SUCCESS.toString()))
 			{			
-				//  数据头是查询成功
+				//  签字成功
 				return true;
 			}
 			else

@@ -2,6 +2,8 @@ package signsocket;
 
 public enum ClientRequest {
 	LOGIN_REQUEST,
+	DOWNLOAD_STATISTIC_REQUEST,
+	DOWNLOAD_REGULARLOAD_REQUEST,
 	
 	
     /// <summary>

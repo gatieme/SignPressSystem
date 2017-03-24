@@ -32,12 +32,18 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.hljhw.signature.R;
 
 public class DetailActivity extends Activity implements OnClickListener {
 	
 	private Button btnAgree;
 	private Button btnRefuse;
-	
+    //栏目6的签字人名字	
+	private String NHColumn6SignName="";
+	private String JHLXColumn6SignName="";
+	private String CurrentEmployeeName="";
+	//2016-5-15  加入审核意见	
+	private EditText Advice;
 	private EditText Remarks;
 	
 	private AppContext app;
@@ -59,17 +65,26 @@ public class DetailActivity extends Activity implements OnClickListener {
 	{
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		//读取并显示activity_detail.xml中的资料到画面上
         setContentView(R.layout.activity_detail);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.backtitlebar);
 		
         btnBack=(Button)findViewById(R.id.back);
         btnBack.setOnClickListener(this);
+        
+       
+		
 		TextView tvAndroid=(TextView)findViewById(R.id.tvCWJ);
 		tvAndroid.setMovementMethod(ScrollingMovementMethod.getInstance());
+		
+		
 		
 		this.btnAgree = (Button)findViewById(R.id.btnAgree);
 		this.btnRefuse=(Button)findViewById(R.id.btnRefuse);
 		this.Remarks=(EditText)findViewById(R.id.tvCWJ);
+	
+	
+		//this.Advice.setVisibility(View.GONE);
 		
 		titleList=new ArrayList<String>();
 		contentList=new ArrayList<String>();
@@ -78,14 +93,20 @@ public class DetailActivity extends Activity implements OnClickListener {
 		
 		app = (AppContext)getApplication();
 		contractId = app.getContractId();
+		//登录用户名
 		String employeename=app.getEmployee().Name;
 		
+		CurrentEmployeeName=employeename;
+		//Toast.makeText(DetailActivity.this, CurrentEmployeeName, Toast.LENGTH_SHORT).show();
 		HDJContract contract = new HDJContract();
+		//获取选择的会签单信息
 		contract=SocketClient.instance().GetHDJContract(contractId);
+		//获取栏目信息
 		for(String s : contract.ConTemp.ColumnNames)
 		{
 			titleList.add(s+"：");
 		}
+		//获取签字信息
 		for(SignatureTemplate s : contract.ConTemp.SignDatas)
 		{
 			titleList.add(s.SignInfo+"：");
@@ -98,6 +119,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 			contentList.add(s);
 		}
 		
+		//判断该用户是否有view功能
 		for(int i=0;i<contract.ConTemp.SignDatas.size();i++)
 		{
 			String n=contract.ConTemp.SignDatas.get(i).SignEmployee.Name;
@@ -116,7 +138,10 @@ public class DetailActivity extends Activity implements OnClickListener {
 			{
 				String name=contract.ConTemp.SignDatas.get(i).SignEmployee.Name;
 				String result=contract.SignResults.get(i)==1?"同意":(contract.SignResults.get(i)==0?"未处理":"拒绝");
-				contentList.add(name+"("+result+")");
+				
+				
+					contentList.add(name+"("+result+")");
+				
 			}
 		}
 		else
@@ -127,6 +152,8 @@ public class DetailActivity extends Activity implements OnClickListener {
 				contentList.add(name);
 			}
 		}
+	
+	
 		
 		Title=new String[titleList.size()];
 		for(int i=0;i<titleList.size();i++)
@@ -191,11 +218,13 @@ public class DetailActivity extends Activity implements OnClickListener {
 		            //activity_main_btn1.setText("请求结果为："+result);//可以更新UI
 		        	//  获取备注中的信息
 					String remarks=Remarks.getText().toString();
-
+					//Toast.makeText(DetailActivity.this, "我还没进入", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(DetailActivity.this, "栏目6的姓名:"+NHColumn6SignName+"."+JHLXColumn6SignName+CurrentEmployeeName, Toast.LENGTH_SHORT).show();
 					if(remarks.equals(""))
 					{
 						remarks="未填";
 					}
+					
 					
 	
 					// 手机能联网，读socket数据
@@ -205,7 +234,8 @@ public class DetailActivity extends Activity implements OnClickListener {
 						sd.Remark=remarks;
 						sd.Result=1;
 						sd.ConId=contractId;
-						
+						//Toast.makeText(DetailActivity.this, "栏目6的姓名:"+NHColumn6SignName+"."+JHLXColumn6SignName, Toast.LENGTH_SHORT).show();
+						//Toast.makeText(DetailActivity.this, "审核意见:"+sd.Advice+"名字:"+CurrentEmployeeName, Toast.LENGTH_SHORT).show();
 						app=(AppContext)getApplication();
 				        final Employee emp = app.getEmployee();
 						

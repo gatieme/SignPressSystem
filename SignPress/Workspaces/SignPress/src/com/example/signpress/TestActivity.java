@@ -23,6 +23,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.hljhw.signature.R;
  
 
 public class TestActivity extends Activity {

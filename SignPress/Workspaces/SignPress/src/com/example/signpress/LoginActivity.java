@@ -41,6 +41,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import com.hljhw.signature.R;
 import signdata.Employee;
 import signdata.User;
 import signsocket.NetManager;
@@ -302,8 +303,7 @@ public class LoginActivity extends Activity
 	
 	/*********启动客户端方法***********/
     public void Connect()
-    {
-            
+    {   
        try 
        {
            InetAddress addr = InetAddress.getByName("10.0.213.117");//服务端手机网络IP地址，连一下wifi就可以知道

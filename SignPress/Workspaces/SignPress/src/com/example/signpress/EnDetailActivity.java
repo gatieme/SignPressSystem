@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import com.hljhw.signature.R;
 
 public class EnDetailActivity extends Activity implements OnClickListener {
 	
@@ -99,15 +100,15 @@ public class EnDetailActivity extends Activity implements OnClickListener {
 			{
 				String name=contract.ConTemp.SignDatas.get(i).SignEmployee.Name;
 				String result=contract.SignResults.get(i)==1?"同意":(contract.SignResults.get(i)==0?"未处理":"拒绝");
-				contentList.add(name+"("+result+")");
+					contentList.add(name+"("+result+")");
 			}
 		}
 		else
 		{
 			for(int i=0;i<contract.ConTemp.SignDatas.size();i++)
 			{
-				String name=contract.ConTemp.SignDatas.get(i).SignEmployee.Name;
-				contentList.add(name);
+				String name=contract.ConTemp.SignDatas.get(i).SignEmployee.Name;	
+					contentList.add(name);
 			}
 		}
 		

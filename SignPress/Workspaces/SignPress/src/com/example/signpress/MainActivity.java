@@ -31,6 +31,7 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.hljhw.signature.R;
 
 public class MainActivity extends Activity implements OnClickListener {
 	
@@ -45,6 +46,9 @@ public class MainActivity extends Activity implements OnClickListener {
     private Button btnExit;
     private static boolean isExit = false;
     private BaseExpandableListAdapter adapter ;
+    private Button btnDowload;
+    
+    
     
     private Handler handler=new Handler();
     private Runnable runnable = new Runnable() 
@@ -113,7 +117,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	        mNotificationManager.notify(1, notification);
 		}
     };
-    
+     
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +129,24 @@ public class MainActivity extends Activity implements OnClickListener {
         
         btnExit=(Button)findViewById(R.id.exit);
         btnExit.setOnClickListener(this);
+        
+        
+        btnDowload=(Button) this.findViewById(R.id.download);
+        btnDowload.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(app.getEmployee().CanStatistic==1)
+				{
+				Intent intent=new Intent(MainActivity.this,DownLoadActivity.class);
+				startActivity(intent);
+				}
+				else 
+				{
+					Toast.makeText(MainActivity.this, "对不起，您没有下载权限！", Toast.LENGTH_SHORT).show();
+				}
+				
+			}
+		});
         
 		app=(AppContext)getApplication();
         final Employee emp = app.getEmployee();
@@ -386,6 +408,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			              }, 2000);
 			          } else {
 			              MainActivity.this.finish();
+			              
 			    }
 		}
 }
